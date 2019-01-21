@@ -1,0 +1,96 @@
+﻿@*@model RegisterDB.Models.Registration*@
+@model RegisterMVC.Models.Registration
+
+
+<div style="color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+    <h2>Registration Page</h2>
+</div>
+   @using (Html.BeginForm("ClickEvent","Home",FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+    <div style="background-color:#d1e0e0;width:1350px">
+        @Html.ValidationSummary(true)
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+        @*@Html.EditorFor(model => model.FirstName)*@
+        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    
+                    <input id="fname" name="fname" type="text" pattern="[a-zA-Z0-9 ]{6,10}" title="can have Alphabets and space of 6 to 10 characters." required oninvalid="this.setCustomValidity('Please Enter First name')" />
+                </td>
+
+</tr>
+            <tr>
+                <td>
+                @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                @*@Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)*@
+                    <input id="lname" name="lname" type="text" pattern="[a-zA-Z0-9 ]{6,10}" title="can have Alphabets and space of 6 to 10 characters." required oninvalid="this.setCustomValidity('Please Enter last name')" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                </td>
+        <td>
+            
+                @*@Html.EditorFor(model => model.Email)
+            @Html.ValidateFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            @Html.ValidateFor(model => model.Email)*@
+            <input id="email" name="email" type="email" pattern="/^([\w-\.]+\u0040([\w-]+\.)+[\w-]{2,4})?$/" title="Please Enter Valid Email ID" required oninvalid="this.setCustomValidity('Please Enter email')" />
+                </td>
+            </tr>
+
+            <tr><td>
+                @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                @*@Html.EditorFor(model => model.PhoneNumber)
+                @Html.ValidationMessageFor(model => model.PhoneNumber)*@
+                    <input id="mobile" name="mobile" type="number" min="1000000000" max="9999999999" title="Please Enter Valid Mobile number" required oninvalid="this.setCustomValidity('Please Enter mobile number')" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                @*@Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)*@
+                    <input id="address" name="address" type="text" pattern="[a-zA-Z0-1 ]{1,30}" title="can have Alphabets, numbers and space of upto 30 characters." required oninvalid="this.setCustomValidity('Please Enter address')" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                @*@Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)*@
+                    <input id="password" name="password" type="password" required oninvalid="this.setCustomValidity('Please Enter password')" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$\u0040$!%*#?&])[A-Za-z\d$\u0040$!%*#?&]{8,}$" title="Minimum 8 characters atleast 1 Alphabet, 1 Number and 1 Special Character" />
+                    @Html.ValidationMessage("email")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Create" />
+                </td>
+        </tr>
+        </table>
+        </div>
+    }
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

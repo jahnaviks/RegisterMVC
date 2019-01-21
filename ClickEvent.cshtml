@@ -1,0 +1,18 @@
+﻿<div style="color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+    <h2>Registration Page</h2>
+</div>
+@{
+        var data = ViewBag.Message;
+        if(data == null)
+        {
+            <div style="color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+                <h3>Successfully Registered</h3>
+            </div>
+        }
+        else
+        {
+            <div style="color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+                <h3>Not Registered as the email Already exists</h3>
+            </div>
+        }
+}

@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<RegisterMVC.Models.Registration>
+
+           @*@model RegisterMVC.Models.Registration*@
+ 
+<div style="color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+    <h2>View Details</h2>
+</div>
+<div style="color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+    <table border="1" width="1350px">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Id</th>
+                <th>Mobile Number</th>
+                <th>Address</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var std in Model)//ViewData["list"] as IPagedList<RegisterMVC.Models.Registration>)
+                {
+                    <tr>
+                        <td>@std.FirstName</td>
+                        <td>@std.LastName</td>
+                        <td>@std.Email</td>
+                        <td>@std.PhoneNumber</td>
+                        <td>@std.Address</td>
+                        <td>@std.Password</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @*<div style="margin-left: 400px">
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("ViewList", new { page }))
+        <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("ViewList", new { page }))</p>
+    </div>*@
+    </div>
+<div style="height: 35px;width:100px"></div>
+    <div style="height: 35px; color: #334d4d; text-align: center; background-color: #d1e0e0; width: 1350px">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "ViewList", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw(" ");
+        @Html.ActionLink("< Prev", "ViewList", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw(" ");
+        @:< Prev
+    }
+
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "ViewList", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw(" ");
+        @Html.ActionLink(">>", "ViewList", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw(" ")
+        @:>>
+    }
+</div>
